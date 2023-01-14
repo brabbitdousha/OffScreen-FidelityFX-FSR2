@@ -20,12 +20,19 @@ struct config
     bool enableJitter = false;
 };
 
+bool cmp(std::string& str1, std::string& str2)
+{
+    int num1 = atoi(str1.c_str());
+    int num2 = atoi(str2.c_str());
+    return num1 < num2;
+}
+
 bool get_files(std::vector<std::string>& fileNames, std::string& input_path)
 {
     FindFiles finder;
     fileNames = finder.findFiles(input_path.c_str());
     if (fileNames.empty()) return false;
-    std::sort(fileNames.begin(), fileNames.end());
+    std::sort(fileNames.begin(), fileNames.end(),cmp);
     return true;
 }
 
